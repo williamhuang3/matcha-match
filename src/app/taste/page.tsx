@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const usageOptions = ["Koicha", "Usucha", "Latte", "Culinary"];
 const flavorOptions = [
   {
     key: "umami",

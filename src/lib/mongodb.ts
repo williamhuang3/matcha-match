@@ -1,25 +1,31 @@
-import mongoose from "mongoose";
+// src/lib/mongodb.ts
+import mongoose, { Mongoose } from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 
-let cached = global.mongoose || { conn: null, promise: null };
+declare global {
+  // Avoid re-declaring in every file
+  // eslint-disable-next-line no-var
+  var _mongoose: {
+    conn: Mongoose | null;
+    promise: Promise<Mongoose> | null;
+  };
+}
 
-async function dbConnect() {
+const cached = global._mongoose || { conn: null, promise: null };
+global._mongoose = cached;
+
+async function dbConnect(): Promise<Mongoose> {
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
     cached.promise = mongoose.connect(MONGODB_URI, {
       dbName: "matcha",
-    }).then((mongoose) => {
-      return mongoose;
-    });
+    }).then((mongoose) => mongoose);
   }
+
   cached.conn = await cached.promise;
   return cached.conn;
-}
-
-declare global {
-  var mongoose: any;
 }
 
 export default dbConnect;
