@@ -1,6 +1,6 @@
 // src/app/results/page.tsx
 import { Suspense } from "react";
-import ResultsClient from "./resultsClient";
+import ResultsClient from "./ResultsClient";
 
 export const dynamic = "force-dynamic"; 
 // or "force-static", but "force-dynamic" is safer for user input

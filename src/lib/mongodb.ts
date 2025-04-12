@@ -20,7 +20,7 @@ async function dbConnect(): Promise<Mongoose> {
 
   if (!cached.promise) {
     cached.promise = mongoose.connect(MONGODB_URI, {
-      dbName: "matcha",
+      dbName: "test",
     }).then((mongoose) => mongoose);
   }
 

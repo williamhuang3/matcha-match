@@ -7,7 +7,7 @@ export default function Home() {
         🍵 MatchaMatch
       </h1>
       <p className="text-lg sm:text-xl text-matcha-taupe max-w-md mb-8">
-        Discover your ideal matcha based on your unique taste. No fluff—just flavor.
+        Get personalized matcha recommendations based on your taste preferences after taking a short quiz. 
       </p>
       <Link
         href="/taste"

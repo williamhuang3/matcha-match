@@ -2,7 +2,6 @@ export type Matcha = {
     _id?: string;
     brand: string;
     name: string;
-    origin?: string | null;
     price?: number | null;
     experience?: "Beginner" | "Intermediate" | "Advanced";
     profile: {
@@ -12,6 +11,6 @@ export type Matcha = {
       sweetness: number;
     };
     usage: string[];
-    cultivars?: string[];
+    cultivars: string[];
   };
   

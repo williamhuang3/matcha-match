@@ -1,17 +1,18 @@
 import mongoose from "mongoose";
 
-const MatchaSchema = new mongoose.Schema({
+const matchaSchema = new mongoose.Schema({
   brand: { type: String, required: true },
   name: { type: String, required: true },
-  origin: String,
-  price: Number, // USD per 30g
+  price: { type: Number },
+  experience: { type: String, enum: ["Beginner", "Intermediate", "Advanced"] },
   profile: {
-    umami: { type: Number, default: 0 },
-    grassy: { type: Number, default: 0 },
-    nutty: { type: Number, default: 0 },
-    astringency: { type: Number, default: 0 },
+    umami: { type: Number, required: true },
+    grassy: { type: Number, required: true },
+    nutty: { type: Number, required: true },
+    sweetness: { type: Number, required: true },
   },
-  usage: [String], // e.g., ["koicha", "latte"]
+  usage: [String],
+  cultivars: [String],
 });
 
-export default mongoose.models.Matcha || mongoose.model("Matcha", MatchaSchema);
+export default mongoose.models.Matcha || mongoose.model("Matcha", matchaSchema);

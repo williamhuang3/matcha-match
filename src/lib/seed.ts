@@ -29,8 +29,7 @@ const matchas = [
   {
     brand: "Ippodo",
     name: "Ikuyo",
-    origin: null,
-    price: null,
+    price: 0.63,
     experience: "Beginner",
     profile: {
       umami: 3,
@@ -39,58 +38,57 @@ const matchas = [
       sweetness: 2
     },
     usage: ["latte"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Ippodo",
     name: "Ummon",
-    origin: null,
-    price: null,
+    price: 1.45,
     experience: "Advanced",
     profile: {
-      umami: 4,
-      grassy: 4,
-      nutty: 1,
-      sweetness: 1
-    },
-    usage: ["koicha"],
-    cultivars: []
-  },
-  {
-    brand: "Ippodo",
-    name: "Seiun",
-    origin: null,
-    price: null,
-    experience: "Intermediate",
-    profile: {
-      umami: 2,
-      grassy: 5,
-      nutty: 4,
-      sweetness: 4
-    },
-    usage: ["latte", "usucha"],
-    cultivars: []
-  },
-  {
-    brand: "Ippodo",
-    name: "Sayaka",
-    origin: null,
-    price: null,
-    experience: "Beginner",
-    profile: {
-      umami: 2,
+      umami: 5,
       grassy: 4,
       nutty: 3,
       sweetness: 4
     },
+    usage: ["koicha"],
+    cultivar: ["Blend"]
+  },
+  {
+    brand: "Ippodo",
+    name: "Seiun",
+   
+    price: 1.2,
+    experience: "Intermediate",
+    profile: {
+      umami: 4,
+      grassy: 3,
+      nutty: 4,
+      sweetness: 4
+    },
     usage: ["latte", "usucha"],
-    cultivars: []
+    cultivar: ["Blend"]
+  },
+  {
+    brand: "Ippodo",
+    name: "Sayaka",
+   
+    price: 0.93,
+    experience: "Beginner",
+    profile: {
+      umami: 4,
+      grassy: 4,
+      nutty: 2,
+      sweetness: 4
+    },
+    usage: ["latte", "usucha"],
+    cultivar: ["Blend"]
   },
   {
     brand: "Marukyu Koyamaen",
     name: "Aorashi",
-    origin: null,
-    price: null,
+   
+    price: 0.27,
     experience: "Beginner",
     profile: {
       umami: 3,
@@ -99,13 +97,13 @@ const matchas = [
       sweetness: 3
     },
     usage: ["culinary", "latte"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Marukyu Koyamaen",
     name: "Wako",
-    origin: null,
-    price: null,
+   
+    price: 0.63,
     experience: "Intermediate",
     profile: {
       umami: 3,
@@ -114,13 +112,13 @@ const matchas = [
       sweetness: 3
     },
     usage: ["latte", "usucha"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Marukyu Koyamaen",
     name: "Isuzu",
-    origin: null,
-    price: null,
+   
+    price: 0.34,
     experience: "Beginner",
     profile: {
       umami: 4,
@@ -129,13 +127,13 @@ const matchas = [
       sweetness: 3
     },
     usage: ["latte", "usucha"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Marukyu Koyamaen",
     name: "Yugen",
-    origin: null,
-    price: null,
+   
+    price: 0.51,
     experience: "Beginner",
     profile: {
       umami: 3,
@@ -144,28 +142,58 @@ const matchas = [
       sweetness: 4
     },
     usage: ["latte"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Marukyu Koyamaen",
-    name: "Unkaku",
-    origin: null,
-    price: null,
-    experience: "Intermediate",
+    name: "Tenju",
+   
+    price: 4.1,
+    experience: "Advanced",
     profile: {
       umami: 5,
       grassy: 4,
       nutty: 3,
+      sweetness: 4
+    },
+    usage: ["usucha"],
+    cultivar: ["Blend"]
+  },
+  {
+    brand: "Marukyu Koyamaen",
+    name: "Unkaku",
+   
+    price: 1.05,
+    experience: "Intermediate",
+    profile: {
+      umami: 4,
+      grassy: 3,
+      nutty: 2,
       sweetness: 3
     },
     usage: ["usucha", "koicha"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Marukyu Koyamaen",
     name: "Eiju",
-    origin: null,
-    price: null,
+   
+    price: 1.4,
+    experience: "Intermediate",
+    profile: {
+      umami: 5,
+      grassy: 3,
+      nutty: 2,
+      sweetness: 3
+    },
+    usage: ["usucha"],
+    cultivar: ["Blend"]
+  },
+  {
+    brand: "Marukyu Koyamaen",
+    name: "Kinrin",
+   
+    price: 0.85,
     experience: "Intermediate",
     profile: {
       umami: 4,
@@ -174,28 +202,28 @@ const matchas = [
       sweetness: 2
     },
     usage: ["usucha"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Tokichi Nakamura",
     name: "Fuji no Shiro",
-    origin: null,
-    price: null,
+   
+    price: 0.3,
     experience: "Beginner",
     profile: {
-      umami: 4,
+      umami: 3,
       grassy: 2,
       nutty: 1,
       sweetness: 3
     },
     usage: ["latte", "usucha"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Gokago",
     name: "Shin",
-    origin: null,
-    price: null,
+   
+    price: 0.6,
     experience: "Beginner",
     profile: {
       umami: 4,
@@ -204,13 +232,13 @@ const matchas = [
       sweetness: 5
     },
     usage: ["latte", "culinary"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Gokago",
     name: "Rai",
-    origin: null,
-    price: null,
+   
+    price: 0.93,
     experience: "Intermediate",
     profile: {
       umami: 4,
@@ -219,13 +247,13 @@ const matchas = [
       sweetness: 2
     },
     usage: ["latte", "usucha"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Matchaful",
     name: "Hikari",
-    origin: null,
-    price: null,
+   
+    price: 0.65,
     experience: "Beginner",
     profile: {
       umami: 3,
@@ -234,13 +262,13 @@ const matchas = [
       sweetness: 2
     },
     usage: ["latte"],
-    cultivars: []
+    cultivar: ["Uji Hikari"]
   },
   {
     brand: "Matchaful",
     name: "Kiwami",
-    origin: null,
-    price: null,
+   
+    price: 0.8,
     experience: "Intermediate",
     profile: {
       umami: 4,
@@ -249,13 +277,28 @@ const matchas = [
       sweetness: 4
     },
     usage: ["latte", "usucha"],
-    cultivars: []
+    cultivar: ["Kiwami"]
+  },
+  {
+    brand: "Kettl",
+    name: "Hanaka",
+   
+    price: 1.4,
+    experience: "Advanced",
+    profile: {
+      umami: 2,
+      grassy: 1,
+      nutty: 4,
+      sweetness: 3
+    },
+    usage: ["usucha", "latte"],
+    cultivar: ["Blend"]
   },
   {
     brand: "Kettl",
     name: "Shirakawa Samidori",
-    origin: null,
-    price: null,
+   
+    price: 2.4,
     experience: "Advanced",
     profile: {
       umami: 5,
@@ -264,13 +307,13 @@ const matchas = [
       sweetness: 4
     },
     usage: ["usucha"],
-    cultivars: []
+    cultivar: ["Samidori"]
   },
   {
     brand: "Kettl",
     name: "Shirakawa Legacy Blend",
-    origin: null,
-    price: null,
+   
+    price: 0.9,
     experience: "Intermediate",
     profile: {
       umami: 4,
@@ -279,28 +322,13 @@ const matchas = [
       sweetness: 2
     },
     usage: ["latte", "usucha"],
-    cultivars: []
+    cultivar: ["Yabukita", "Saemidori", "Samidori"]
   },
   {
     brand: "Horii Shichimeien",
     name: "Homare no Mukashi",
-    origin: null,
-    price: null,
-    experience: "Intermediate",
-    profile: {
-      umami: 4,
-      grassy: 2,
-      nutty: 1,
-      sweetness: 2
-    },
-    usage: ["usucha", "koicha"],
-    cultivars: []
-  },
-  {
-    brand: "Horii Shichimeien",
-    name: "Todou Mukashi",
-    origin: null,
-    price: null,
+   
+    price: 1.77,
     experience: "Advanced",
     profile: {
       umami: 5,
@@ -309,13 +337,28 @@ const matchas = [
       sweetness: 3
     },
     usage: ["usucha", "koicha"],
-    cultivars: []
+    cultivar: ["Blend"]
+  },
+  {
+    brand: "Horii Shichimeien",
+    name: "Todou Mukashi",
+   
+    price: 1.07,
+    experience: "Intermediate",
+    profile: {
+      umami: 4,
+      grassy: 2,
+      nutty: 2,
+      sweetness: 3
+    },
+    usage: ["usucha", "koicha"],
+    cultivar: ["Blend"]
   },
   {
     brand: "Horii Shichimeien",
     name: "Agata no Shiro",
-    origin: null,
-    price: null,
+   
+    price: 0.73,
     experience: "Intermediate",
     profile: {
       umami: 3,
@@ -324,28 +367,28 @@ const matchas = [
       sweetness: 4
     },
     usage: ["koicha"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Horii Shichimeien",
     name: "Uji Mukashi",
-    origin: null,
-    price: null,
-    experience: "Intermediate",
+   
+    price: 0.57,
+    experience: "Beginner",
     profile: {
       umami: 3,
       grassy: 2,
       nutty: 2,
-      sweetness: 4
+      sweetness: 3
     },
     usage: ["latte", "usucha"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Rockys Matcha",
     name: "Oishi",
-    origin: null,
-    price: null,
+   
+    price: 1.8,
     experience: "Advanced",
     profile: {
       umami: 4,
@@ -354,13 +397,13 @@ const matchas = [
       sweetness: 4
     },
     usage: ["koicha", "usucha"],
-    cultivars: []
+    cultivar: ["Okumidori", "Saemidori", "Yabukita"]
   },
   {
     brand: "Rockys Matcha",
     name: "Koshun",
-    origin: null,
-    price: null,
+   
+    price: 1.4,
     experience: "Advanced",
     profile: {
       umami: 3,
@@ -369,13 +412,13 @@ const matchas = [
       sweetness: 2
     },
     usage: ["koicha", "usucha"],
-    cultivars: []
+    cultivar: ["Koshun"]
   },
   {
     brand: "Rockys Matcha",
     name: "Ceremonial Blend",
-    origin: null,
-    price: null,
+   
+    price: 1.4,
     experience: "Intermediate",
     profile: {
       umami: 4,
@@ -384,13 +427,13 @@ const matchas = [
       sweetness: 3
     },
     usage: ["latte", "usucha"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Rockys Matcha",
     name: "Asahi",
-    origin: null,
-    price: null,
+   
+    price: 2.9,
     experience: "Intermediate",
     profile: {
       umami: 5,
@@ -399,13 +442,13 @@ const matchas = [
       sweetness: 4
     },
     usage: ["usucha"],
-    cultivars: []
+    cultivar: ["Asahi"]
   },
   {
     brand: "Rockys Matcha",
     name: "Uji Hikari",
-    origin: null,
-    price: null,
+   
+    price: 2.6,
     experience: "Intermediate",
     profile: {
       umami: 3,
@@ -414,13 +457,13 @@ const matchas = [
       sweetness: 4
     },
     usage: ["usucha", "latte"],
-    cultivars: []
+    cultivar: ["Uji Hikari"]
   },
   {
     brand: "Rockys Matcha",
     name: "Osada",
-    origin: null,
-    price: null,
+   
+    price: 1.2,
     experience: "Beginner",
     profile: {
       umami: 3,
@@ -429,14 +472,14 @@ const matchas = [
       sweetness: 3
     },
     usage: ["usucha"],
-    cultivars: []
+    cultivar: ["Okumidori", "Saemidori"]
   },
   {
     brand: "Rockys Matcha",
     name: "Gokou",
-    origin: null,
-    price: null,
-    experience: "Intermediate",
+   
+    price: 2.4,
+    experience: "Advanced",
     profile: {
       umami: 2,
       grassy: 4,
@@ -444,13 +487,13 @@ const matchas = [
       sweetness: 4
     },
     usage: ["usucha", "koicha"],
-    cultivars: []
+    cultivar: ["Gokou"]
   },
   {
     brand: "Nami Matcha",
     name: "Yame First Harvest",
-    origin: null,
-    price: null,
+   
+    price: 1.2,
     experience: "Beginner",
     profile: {
       umami: 2,
@@ -459,13 +502,13 @@ const matchas = [
       sweetness: 2
     },
     usage: ["latte", "usucha"],
-    cultivars: []
+    cultivar: ["Okumidori", "Saemidori"]
   },
   {
     brand: "Nami Matcha",
     name: "Okumidori First Harvest",
-    origin: null,
-    price: null,
+   
+    price: 1.13,
     experience: "Beginner",
     profile: {
       umami: 2,
@@ -474,13 +517,13 @@ const matchas = [
       sweetness: 2
     },
     usage: ["culinary", "usucha"],
-    cultivars: []
+    cultivar: ["Okumidori"]
   },
   {
     brand: "Matcha Kari",
     name: "First Harvest",
-    origin: null,
-    price: null,
+   
+    price: 1.01,
     experience: "Beginner",
     profile: {
       umami: 4,
@@ -489,13 +532,13 @@ const matchas = [
       sweetness: 3
     },
     usage: ["latte", "usucha"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Kanbayashi Shunsho",
     name: "Aya No Mori",
-    origin: null,
-    price: null,
+   
+    price: 0.32,
     experience: "Beginner",
     profile: {
       umami: 2,
@@ -504,14 +547,13 @@ const matchas = [
       sweetness: 2
     },
     usage: ["latte", "usucha"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Kanbayashi Shunsho",
     name: "Hatsumukashi",
-    origin: null,
-    price: null,
-    experience: "Intermediate",
+    price: 1.67,
+    experience: "Advanced",
     profile: {
       umami: 5,
       grassy: 3,
@@ -519,22 +561,22 @@ const matchas = [
       sweetness: 3
     },
     usage: ["koicha"],
-    cultivars: []
+    cultivar: ["Blend"]
   },
   {
     brand: "Yamamasa Koyamaen",
     name: "Ogurayama",
-    origin: null,
-    price: null,
+   
+    price: 0.47,
     experience: "Beginner",
     profile: {
       umami: 4,
       grassy: 2,
       nutty: 1,
-      sweetness: 3
+      sweetness: 2
     },
     usage: ["latte", "usucha"],
-    cultivars: []
+    cultivar: ["Blend"]
   }
   ];
 

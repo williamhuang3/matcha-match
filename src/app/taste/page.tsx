@@ -26,7 +26,7 @@ const flavorOptions = [
   },
 ];
 
-const cultivarOptions = ["Samidori", "Asahi", "Uji Hikari", "Yabukita"];
+const cultivarOptions = ["Samidori", "Asahi", "Uji Hikari", "Yabukita", "Okumidori", "Saemidori"];
 
 export default function TasteTestPage() {
   const router = useRouter();
@@ -66,7 +66,7 @@ export default function TasteTestPage() {
       experience,
       ...flavors,
       usage,
-      price,
+      price: price/30,
       cultivars,
     };
 
@@ -84,16 +84,30 @@ export default function TasteTestPage() {
           <label className="block mb-2 text-sm font-medium text-matcha-taupe">
             Experience Level
           </label>
-          <select
-            value={experience}
-            onChange={(e) => setExperience(e.target.value)}
-            className="w-full p-2 rounded bg-white border border-matcha-med"
-          >
-            <option>Beginner</option>
-            <option>Intermediate</option>
-            <option>Advanced</option>
-          </select>
+          <div className="flex overflow-hidden rounded-full">
+            {["Beginner", "Intermediate", "Advanced"].map((level) => {
+              const bg =
+                level === "Beginner"
+                  ? "bg-matcha-light"
+                  : level === "Intermediate"
+                  ? "bg-matcha-med"
+                  : "bg-[#4D684A]";
+              return (
+                <button
+                  key={level}
+                  type="button"
+                  onClick={() => setExperience(level)}
+                  className={`flex-1 py-2 text-sm font-medium text-white transition ${
+                    experience === level ? bg : "bg-matcha-taupe text-white"
+                  }`}
+                >
+                  {level}
+                </button>
+              );
+            })}
+          </div>
         </div>
+
 
         {/* Flavor Buttons */}
         {flavorOptions.map(({ key, label, desc }) => (
@@ -178,11 +192,14 @@ export default function TasteTestPage() {
 
 
 
-        {/* Cultivars (Optional) */}
+        {/* Cultivars (Optional) but also talk about what is a cultivar */}
         <div>
-          <label className="block mb-2 text-sm font-medium text-matcha-taupe">
-            Cultivars (optional)
-          </label>
+        <label className="block mb-1 text-sm font-medium text-matcha-taupe">
+          Cultivars (optional)
+        </label>
+        <p className="text-xs text-matcha-taupe mb-2">
+          Cultivars are matcha plant varieties — like grape types for wine. Some are sweeter, some more savory.
+        </p>
           <div className="flex flex-wrap gap-4">
             {cultivarOptions.map((option) => (
               <label key={option} className="flex items-center gap-2">
@@ -201,7 +218,7 @@ export default function TasteTestPage() {
         {/* Price Slider */}
         <div>
           <label className="block mb-1 text-sm font-medium text-matcha-taupe">
-            Ideal Price (30g tin)
+            Target Price (30g tin)
           </label>
           <input
             type="range"
