@@ -1,8 +1,0 @@
-{
-  "/api/matcha/route": "/api/matcha",
-  "/_not-found/page": "/_not-found",
-  "/api/recommend/route": "/api/recommend",
-  "/taste/page": "/taste",
-  "/page": "/",
-  "/results/page": "/results"
-}
