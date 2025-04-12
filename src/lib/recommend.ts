@@ -14,13 +14,6 @@ export type TasteProfile = {
 const usageOptions = ["koicha", "usucha", "latte", "culinary"];
 const experienceMap = { Beginner: 0, Intermediate: 1, Advanced: 2 };
 
-// function zScoreNormalize(values: number[]): number[] {
-//   const mean = values.reduce((a, b) => a + b, 0) / values.length;
-//   const std = Math.sqrt(
-//     values.reduce((sum, val) => sum + (val - mean) ** 2, 0) / values.length
-//   );
-//   return values.map((val) => (val - mean) / (std || 1));
-// }
 
 function oneHotEncodeUsage(usage: string[]): number[] {
   return usageOptions.map((opt) => (usage.includes(opt) ? 1 : 0));
