@@ -156,7 +156,7 @@ export default function TasteTestPage() {
                   onClick={() => !isDisabled && toggleUsage(key)}
                   className={`flex w-full items-start justify-between gap-4 p-3 border rounded-lg transition
                     ${isSelected ? "bg-matcha-med text-white" : "border-matcha-med"}
-                    ${isDisabled ? "opacity-40 cursor-not-allowed" : "hover:bg-matcha-light"}`}
+                    ${isDisabled ? "opacity-40 cursor-not-allowed" : ""}`}
                 >
                   <div className="flex-1 text-left">
                     <p className="font-semibold text-matcha-taupe">{key}</p>
