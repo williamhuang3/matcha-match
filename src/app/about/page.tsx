@@ -6,36 +6,37 @@ export default function AboutPage() {
     <main className="max-w-2xl mx-auto p-6 sm:p-8 text-center text-matcha-taupe flex flex-col items-center space-y-6">
 
       {/* Profile Picture */}
-      <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg border-4 border-matcha-med">
+      <div className="w-full max-w-md rounded-xl overflow-hidden shadow-lg border-4 border-matcha-med">
         <Image
-          src="/me.jpg"
-          alt="William Huang"
-          width={128}
-          height={128}
-          className="object-cover w-full h-full"
+          src="/me.jpeg" // place the new file in /public folder
+          alt="William making matcha"
+          width={800}
+          height={600}
+          className="w-full h-auto object-cover"
         />
       </div>
+
 
       {/* Intro & Backstory */}
       <div className="space-y-6">
         <h1 className="text-3xl sm:text-4xl font-bold">About MatchaMatch</h1>
 
         <p className="text-lg leading-relaxed">
-          Hey! I&rsquo;m Will — a matcha enthusiast, UCLA computational biology grad transitionning into SWE, and (hopefully) future café owner.
+          Hey! I&rsquo;m Will — a matcha enthusiast, UCLA computational biology grad pivoting to SWE, and (hopefully) future café owner.
         </p>
 
         {/* Spacer under first paragraph */}
         <div className="h-2 sm:h-4" />
 
         <p className="text-md leading-relaxed">
-          My first experience with matcha? Mixing Costco matcha powder into vanilla ice cream when I was little. (Lowkey fire)
+          Since my middle school days of mixing Costco matcha powder into vanilla ice cream, I&rsquo;ve tried to perfect my craft and dive deeper into what matcha has to offer. 
+          Fast forward to college, and I now spend most of my free time hosting home cafés for friends, experimenting with new matcha drink recipes, and trying out different cultivars.
+        </p>
+        <p className="text-md leading-relaxed">  
+          Along the way, I realized most people who say they don&rsquo;t like matcha have only tried bulk culinary powder &mdash; and unfortunately walk away thinking it tastes like dirt or grass.
         </p>
         <p className="text-md leading-relaxed">
-          Since then, I&rsquo;ve tried to perfect my craft and dive deeper into what matcha has to offer. These days, I host home cafés for friends, experiment with new matcha drink recipes, and try out different cultivars. Along the way, I noticed that people who don&rsquo;t
-          like matcha always say the same two things: matcha tastes like dirt or matcha tastes like grass.
-        </p>
-        <p className="text-md leading-relaxed">
-          The truth is, matcha is a spectrum: whether its umami-rich to nutty, bright to mellow, sweet to astringent, or culinary to first harvest. I built MatchaMatch to help people discover matchas based on their own taste (like an MBTI).
+          But the truth is, matcha is a spectrum: umami-rich to nutty, bright to mellow, sweet to astringent, or culinary to first harvest (sometimes called ceremonial). With that in mind, I built MatchaMatch as a way to help people discover matchas from personalized taste profiles.
         </p>
         <p className="text-md leading-relaxed">
           Whether you&rsquo;re just getting into it or chasing that perfect koicha, I hope this helps you find something you love!
