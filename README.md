@@ -11,17 +11,14 @@ You rate what flavors you like (umami, grassy, nutty, sweetness), pick your usag
 
 🔍 Under the hood, we use vector similarity (KNN) with normalization to match you to your top 3 blends from a curated list of real Japanese matchas.
 
-> Think Receiptify, but for matcha.
-
 ---
 
 ## ✨ Features
 
 - 🎯 Personalized radar chart of your flavor profile  
 - 🧭 Taste-to-matcha KNN recommendation engine  
-- 🎨 Beautiful, soft matcha-toned UI  
 - 🛒 Direct links to find your top picks online  
-- 🍇 Optional cultivar filtering
+- 🍇 Optional cultivar filtering (WIP)
 
 ---
 
