@@ -3,7 +3,6 @@ export type Matcha = {
     brand: string;
     name: string;
     price?: number | null;
-    experience?: "Beginner" | "Intermediate" | "Advanced";
     profile: {
       umami: number;
       grassy: number;

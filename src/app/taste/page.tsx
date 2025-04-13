@@ -28,10 +28,36 @@ const flavorOptions = [
 
 const cultivarOptions = ["Samidori", "Asahi", "Uji Hikari", "Yabukita", "Okumidori", "Saemidori"];
 
+const usageOptions = [
+  {
+    key: "Koicha",
+    desc: "Thick paste-like matcha",
+    icons: "🍵🍵🍵🍵 + 💧",
+    conflictsWith: ["Latte", "Culinary"],
+  },
+  {
+    key: "Usucha",
+    desc: "Traditional matcha",
+    icons: "🍵🍵 + 💧💧",
+    conflictsWith: ["Culinary"],
+  },
+  {
+    key: "Latte",
+    desc: "Matcha with milk",
+    icons: "🍵 + 💧 + 🥛",
+    conflictsWith: ["Koicha"],
+  },
+  {
+    key: "Culinary",
+    desc: "For smoothies, desserts, or baking",
+    icons: "🍵 + 🍞",
+    conflictsWith: ["Koicha", "Usucha"],
+  },
+];
+
 export default function TasteTestPage() {
   const router = useRouter();
 
-  const [experience, setExperience] = useState("Beginner");
   const [flavors, setFlavors] = useState({
     umami: 3,
     grassy: 3,
@@ -44,7 +70,9 @@ export default function TasteTestPage() {
 
   const toggleUsage = (option: string) => {
     setUsage((prev) =>
-      prev.includes(option) ? prev.filter((u) => u !== option) : [...prev, option]
+      prev.includes(option)
+        ? prev.filter((u) => u !== option)
+        : [...prev, option]
     );
   };
 
@@ -63,10 +91,9 @@ export default function TasteTestPage() {
     }
 
     const tasteData = {
-      experience,
       ...flavors,
       usage,
-      price: price/30,
+      price: price / 30,
       cultivars,
     };
 
@@ -74,40 +101,18 @@ export default function TasteTestPage() {
     router.push(`/results?taste=${encoded}`);
   };
 
+  // Determine disabled usage options
+  const disabledUsages = usageOptions.reduce<string[]>((acc, { key, conflictsWith }) => {
+    if (usage.includes(key)) {
+      return [...acc, ...conflictsWith];
+    }
+    return acc;
+  }, []);
+
   return (
     <main className="max-w-2xl mx-auto p-6 space-y-6">
       <h1 className="text-3xl font-bold text-matcha-taupe">Taste Test</h1>
       <form onSubmit={handleSubmit} className="space-y-6">
-
-        {/* Experience Level */}
-        <div>
-          <label className="block mb-2 text-sm font-medium text-matcha-taupe">
-            Experience Level
-          </label>
-          <div className="flex overflow-hidden rounded-full">
-            {["Beginner", "Intermediate", "Advanced"].map((level) => {
-              const bg =
-                level === "Beginner"
-                  ? "bg-matcha-light"
-                  : level === "Intermediate"
-                  ? "bg-matcha-med"
-                  : "bg-[#4D684A]";
-              return (
-                <button
-                  key={level}
-                  type="button"
-                  onClick={() => setExperience(level)}
-                  className={`flex-1 py-2 text-sm font-medium text-white transition ${
-                    experience === level ? bg : "bg-matcha-taupe text-white"
-                  }`}
-                >
-                  {level}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
 
         {/* Flavor Buttons */}
         {flavorOptions.map(({ key, label, desc }) => (
@@ -135,71 +140,43 @@ export default function TasteTestPage() {
           </div>
         ))}
 
-
-        {/* Usage Selection with Icons */}
+        {/* Usage Selection with Button Cards */}
         <div>
           <label className="block mb-2 text-sm font-medium text-matcha-taupe">
             Preferred Usage
           </label>
           <div className="space-y-4">
-            {[
-              {
-                key: "Koicha",
-                desc: "Thick paste-like matcha",
-                icons: "🍵🍵🍵🍵 + 💧",
-              },
-              {
-                key: "Usucha",
-                desc: "Traditional matcha",
-                icons: "🍵🍵 + 💧💧",
-              },
-              {
-                key: "Latte",
-                desc: "Matcha with milk",
-                icons: "🍵 + 💧 + 🥛",
-              },
-              {
-                key: "Culinary",
-                desc: "For smoothies, desserts, or baking",
-                icons: "🍵 + 🍞",
-              },
-            ].map(({ key, desc, icons }) => (
-              <div
-                key={key}
-                className="flex items-start justify-between gap-4 p-3 border border-matcha-med rounded-lg"
-              >
-                {/* Checkbox left */}
-                <input
-                  type="checkbox"
-                  checked={usage.includes(key)}
-                  onChange={() => toggleUsage(key)}
-                  className="mt-1 accent-matcha-med"
-                />
-
-                {/* Label content */}
-                <div className="flex-1">
-                  <p className="font-semibold text-matcha-taupe">{key}</p>
-                  <p className="text-xs text-matcha-taupe">{desc}</p>
-                </div>
-
-                {/* Icons right */}
-                <div className="text-xl text-right whitespace-nowrap">{icons}</div>
-              </div>
-
-            ))}
+            {usageOptions.map(({ key, desc, icons }) => {
+              const isSelected = usage.includes(key);
+              const isDisabled = !isSelected && disabledUsages.includes(key);
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => !isDisabled && toggleUsage(key)}
+                  className={`flex w-full items-start justify-between gap-4 p-3 border rounded-lg transition
+                    ${isSelected ? "bg-matcha-med text-white" : "border-matcha-med"}
+                    ${isDisabled ? "opacity-40 cursor-not-allowed" : "hover:bg-matcha-light"}`}
+                >
+                  <div className="flex-1 text-left">
+                    <p className="font-semibold text-matcha-taupe">{key}</p>
+                    <p className="text-xs text-matcha-taupe">{desc}</p>
+                  </div>
+                  <div className="text-xl text-right whitespace-nowrap">{icons}</div>
+                </button>
+              );
+            })}
           </div>
         </div>
 
-
-
-        {/* Cultivars (Optional) but also talk about what is a cultivar */}
+        {/* Cultivars (Optional) */}
         <div>
-        <label className="block mb-1 text-sm font-medium text-matcha-taupe">
-          Cultivars (optional)
-        </label>
-        <p className="text-xs text-matcha-taupe mb-2">
-          Cultivars are matcha plant varieties — like grape types for wine. Some are sweeter, some more savory.
-        </p>
+          <label className="block mb-1 text-sm font-medium text-matcha-taupe">
+            Cultivars (optional)
+          </label>
+          <p className="text-xs text-matcha-taupe mb-2">
+            Cultivars are matcha plant varieties — like grape types for wine. Some are sweeter, some more savory.
+          </p>
           <div className="flex flex-wrap gap-4">
             {cultivarOptions.map((option) => (
               <label key={option} className="flex items-center gap-2">
@@ -223,7 +200,7 @@ export default function TasteTestPage() {
           <input
             type="range"
             min={10}
-            max={50}
+            max={70}
             step={1}
             value={price}
             onChange={(e) => setPrice(parseInt(e.target.value))}

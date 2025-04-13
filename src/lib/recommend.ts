@@ -1,4 +1,5 @@
 // src/lib/recommend.ts
+
 import type { Matcha } from "@/types/Matcha";
 
 export type TasteProfile = {
@@ -7,74 +8,85 @@ export type TasteProfile = {
   nutty: number;
   sweetness: number;
   price: number;
-  experience?: "Beginner" | "Intermediate" | "Advanced";
   usage: string[];
 };
 
-const usageOptions = ["koicha", "usucha", "latte", "culinary"];
-const experienceMap = { Beginner: 0, Intermediate: 1, Advanced: 2 };
-
-
-function oneHotEncodeUsage(usage: string[]): number[] {
-  return usageOptions.map((opt) => (usage.includes(opt) ? 1 : 0));
+// Compute Euclidean distance between two feature vectors
+function euclidean(a: number[], b: number[]): number {
+  return Math.sqrt(a.reduce((sum, val, i) => sum + (val - b[i]) ** 2, 0));
 }
 
-function oneHotEncodeExperience(exp: string): number[] {
-  const vec = [0, 0, 0];
-  const idx = experienceMap[exp as keyof typeof experienceMap];
-  vec[idx] = 1;
-  return vec;
-}
-
+// Normalize + weight a profile vector
 function toVector(profile: TasteProfile | Matcha, means?: number[], stds?: number[]): number[] {
-  const isMatcha = (p: unknown): p is Matcha => {
-    return typeof p === "object" && p !== null && "profile" in p;
-  };
+  const isMatcha = (p: unknown): p is Matcha =>
+    typeof p === "object" && p !== null && "profile" in p;
 
   const p = isMatcha(profile) ? profile.profile : profile;
+
   const umami = p.umami ?? 3;
   const grassy = p.grassy ?? 3;
   const nutty = p.nutty ?? 3;
   const sweetness = p.sweetness ?? 3;
   const price = isMatcha(profile) ? profile.price ?? 30 : profile.price ?? 30;
-  const rawExp = profile.experience ?? "Intermediate";
-  const usage = isMatcha(profile) ? profile.usage ?? [] : profile.usage ?? [];
-
-  const usageVec = oneHotEncodeUsage(usage).map((v) => v * 0.5);
-  const expVec = oneHotEncodeExperience(rawExp);
 
   const features = [umami, grassy, nutty, sweetness, price];
+
   const norm = means && stds
     ? features.map((val, i) => (val - means[i]) / (stds[i] || 1))
     : features;
 
-  return [...norm, ...expVec, ...usageVec];
+  const weights = [1, 1, 1, 1, 5]; // Slightly weight price
+  const weighted = norm.map((v, i) => v * weights[i]);
+
+  return weighted;
 }
 
-
-function euclidean(a: number[], b: number[]): number {
-  return Math.sqrt(a.reduce((sum, val, i) => sum + (val - b[i]) ** 2, 0));
+// Soft overlap score: how well does this matcha fulfill the user's intended use?
+function usageScore(user: string[], matcha: string[]): number {
+  const matchSet = new Set((matcha ?? []).map((u) => u.toLowerCase()));
+  const intersect = user.filter((u) => matchSet.has(u.toLowerCase()));
+  return intersect.length / user.length;
 }
 
+// Main function
 export function getTopMatchas(
   user: TasteProfile,
   matchas: Matcha[],
   k = 3
 ): Matcha[] {
+  // Normalize on real taste + price fields
   const featureMatrix = matchas.map((m) => {
     const p = m.profile;
-    return [p.umami ?? 3, p.grassy ?? 3, p.nutty ?? 3, p.sweetness ?? 3, m.price ?? 30];
+    return [
+      p.umami ?? 3,
+      p.grassy ?? 3,
+      p.nutty ?? 3,
+      p.sweetness ?? 3,
+      m.price ?? 30,
+    ];
   });
 
-  const means = featureMatrix[0].map((_, i) => featureMatrix.reduce((sum, row) => sum + row[i], 0) / featureMatrix.length);
-  const stds = featureMatrix[0].map(
-    (_, i) => Math.sqrt(featureMatrix.reduce((sum, row) => sum + (row[i] - means[i]) ** 2, 0) / featureMatrix.length)
+  const means = featureMatrix[0].map((_, i) =>
+    featureMatrix.reduce((sum, row) => sum + row[i], 0) / featureMatrix.length
+  );
+
+  const stds = featureMatrix[0].map((_, i) =>
+    Math.sqrt(
+      featureMatrix.reduce((sum, row) => sum + (row[i] - means[i]) ** 2, 0) /
+        featureMatrix.length
+    )
   );
 
   const userVec = toVector(user, means, stds);
 
   return matchas
-    .map((m) => ({ matcha: m, dist: euclidean(userVec, toVector(m, means, stds)) }))
+    .map((m) => {
+      const vec = toVector(m, means, stds);
+      const dist = euclidean(userVec, vec);
+      const usageBoost = usageScore(user.usage, m.usage ?? []);
+      const adjustedDist = dist - usageBoost * 0.5; // usage match boosts closeness
+      return { matcha: m, dist: adjustedDist };
+    })
     .sort((a, b) => a.dist - b.dist)
     .slice(0, k)
     .map((m) => m.matcha);

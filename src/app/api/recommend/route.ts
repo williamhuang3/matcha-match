@@ -14,7 +14,6 @@ export async function POST(req: NextRequest) {
       brand: doc.brand,
       name: doc.name,
       price: doc.price ?? null,
-      experience: doc.experience ?? "Intermediate",
       profile: doc.profile,
       usage: doc.usage,
       cultivars: doc.cultivars,

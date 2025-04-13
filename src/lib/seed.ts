@@ -30,7 +30,6 @@ const matchas = [
     brand: "Ippodo",
     name: "Ikuyo",
     price: 0.63,
-    experience: "Beginner",
     profile: {
       umami: 3,
       grassy: 3,
@@ -44,7 +43,6 @@ const matchas = [
     brand: "Ippodo",
     name: "Ummon",
     price: 1.45,
-    experience: "Advanced",
     profile: {
       umami: 5,
       grassy: 4,
@@ -59,7 +57,6 @@ const matchas = [
     name: "Seiun",
    
     price: 1.2,
-    experience: "Intermediate",
     profile: {
       umami: 4,
       grassy: 3,
@@ -74,7 +71,6 @@ const matchas = [
     name: "Sayaka",
    
     price: 0.93,
-    experience: "Beginner",
     profile: {
       umami: 4,
       grassy: 4,
@@ -89,7 +85,6 @@ const matchas = [
     name: "Aorashi",
    
     price: 0.27,
-    experience: "Beginner",
     profile: {
       umami: 3,
       grassy: 3,
@@ -104,7 +99,6 @@ const matchas = [
     name: "Wako",
    
     price: 0.63,
-    experience: "Intermediate",
     profile: {
       umami: 3,
       grassy: 2,
@@ -119,7 +113,6 @@ const matchas = [
     name: "Isuzu",
    
     price: 0.34,
-    experience: "Beginner",
     profile: {
       umami: 4,
       grassy: 1,
@@ -134,7 +127,6 @@ const matchas = [
     name: "Yugen",
    
     price: 0.51,
-    experience: "Beginner",
     profile: {
       umami: 3,
       grassy: 2,
@@ -149,7 +141,6 @@ const matchas = [
     name: "Tenju",
    
     price: 4.1,
-    experience: "Advanced",
     profile: {
       umami: 5,
       grassy: 4,
@@ -164,7 +155,6 @@ const matchas = [
     name: "Unkaku",
    
     price: 1.05,
-    experience: "Intermediate",
     profile: {
       umami: 4,
       grassy: 3,
@@ -179,7 +169,6 @@ const matchas = [
     name: "Eiju",
    
     price: 1.4,
-    experience: "Intermediate",
     profile: {
       umami: 5,
       grassy: 3,
@@ -194,7 +183,6 @@ const matchas = [
     name: "Kinrin",
    
     price: 0.85,
-    experience: "Intermediate",
     profile: {
       umami: 4,
       grassy: 3,
@@ -209,7 +197,6 @@ const matchas = [
     name: "Fuji no Shiro",
    
     price: 0.3,
-    experience: "Beginner",
     profile: {
       umami: 3,
       grassy: 2,
@@ -224,7 +211,6 @@ const matchas = [
     name: "Shin",
    
     price: 0.6,
-    experience: "Beginner",
     profile: {
       umami: 4,
       grassy: 3,
@@ -239,7 +225,6 @@ const matchas = [
     name: "Rai",
    
     price: 0.93,
-    experience: "Intermediate",
     profile: {
       umami: 4,
       grassy: 3,
@@ -254,7 +239,6 @@ const matchas = [
     name: "Hikari",
    
     price: 0.65,
-    experience: "Beginner",
     profile: {
       umami: 3,
       grassy: 3,
@@ -269,7 +253,6 @@ const matchas = [
     name: "Kiwami",
    
     price: 0.8,
-    experience: "Intermediate",
     profile: {
       umami: 4,
       grassy: 2,
@@ -284,7 +267,6 @@ const matchas = [
     name: "Hanaka",
    
     price: 1.4,
-    experience: "Advanced",
     profile: {
       umami: 2,
       grassy: 1,
@@ -299,7 +281,6 @@ const matchas = [
     name: "Shirakawa Samidori",
    
     price: 2.4,
-    experience: "Advanced",
     profile: {
       umami: 5,
       grassy: 2,
@@ -314,7 +295,6 @@ const matchas = [
     name: "Shirakawa Legacy Blend",
    
     price: 0.9,
-    experience: "Intermediate",
     profile: {
       umami: 4,
       grassy: 3,
@@ -329,7 +309,6 @@ const matchas = [
     name: "Homare no Mukashi",
    
     price: 1.77,
-    experience: "Advanced",
     profile: {
       umami: 5,
       grassy: 2,
@@ -344,7 +323,6 @@ const matchas = [
     name: "Todou Mukashi",
    
     price: 1.07,
-    experience: "Intermediate",
     profile: {
       umami: 4,
       grassy: 2,
@@ -359,7 +337,6 @@ const matchas = [
     name: "Agata no Shiro",
    
     price: 0.73,
-    experience: "Intermediate",
     profile: {
       umami: 3,
       grassy: 2,
@@ -374,7 +351,6 @@ const matchas = [
     name: "Uji Mukashi",
    
     price: 0.57,
-    experience: "Beginner",
     profile: {
       umami: 3,
       grassy: 2,
@@ -389,7 +365,6 @@ const matchas = [
     name: "Oishi",
    
     price: 1.8,
-    experience: "Advanced",
     profile: {
       umami: 4,
       grassy: 3,
@@ -404,7 +379,6 @@ const matchas = [
     name: "Koshun",
    
     price: 1.4,
-    experience: "Advanced",
     profile: {
       umami: 3,
       grassy: 5,
@@ -419,7 +393,6 @@ const matchas = [
     name: "Ceremonial Blend",
    
     price: 1.4,
-    experience: "Intermediate",
     profile: {
       umami: 4,
       grassy: 3,
@@ -434,7 +407,6 @@ const matchas = [
     name: "Asahi",
    
     price: 2.9,
-    experience: "Intermediate",
     profile: {
       umami: 5,
       grassy: 1,
@@ -449,7 +421,6 @@ const matchas = [
     name: "Uji Hikari",
    
     price: 2.6,
-    experience: "Intermediate",
     profile: {
       umami: 3,
       grassy: 2,
@@ -464,7 +435,6 @@ const matchas = [
     name: "Osada",
    
     price: 1.2,
-    experience: "Beginner",
     profile: {
       umami: 3,
       grassy: 3,
@@ -479,7 +449,6 @@ const matchas = [
     name: "Gokou",
    
     price: 2.4,
-    experience: "Advanced",
     profile: {
       umami: 2,
       grassy: 4,
@@ -494,7 +463,6 @@ const matchas = [
     name: "Yame First Harvest",
    
     price: 1.2,
-    experience: "Beginner",
     profile: {
       umami: 2,
       grassy: 1,
@@ -509,7 +477,6 @@ const matchas = [
     name: "Okumidori First Harvest",
    
     price: 1.13,
-    experience: "Beginner",
     profile: {
       umami: 2,
       grassy: 3,
@@ -524,7 +491,6 @@ const matchas = [
     name: "First Harvest",
    
     price: 1.01,
-    experience: "Beginner",
     profile: {
       umami: 4,
       grassy: 4,
@@ -539,7 +505,6 @@ const matchas = [
     name: "Aya No Mori",
    
     price: 0.32,
-    experience: "Beginner",
     profile: {
       umami: 2,
       grassy: 3,
@@ -553,7 +518,6 @@ const matchas = [
     brand: "Kanbayashi Shunsho",
     name: "Hatsumukashi",
     price: 1.67,
-    experience: "Advanced",
     profile: {
       umami: 5,
       grassy: 3,
@@ -568,7 +532,6 @@ const matchas = [
     name: "Ogurayama",
    
     price: 0.47,
-    experience: "Beginner",
     profile: {
       umami: 4,
       grassy: 2,

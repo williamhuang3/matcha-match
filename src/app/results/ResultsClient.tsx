@@ -121,7 +121,6 @@ export default function ResultsClient() {
       {/* Taste Input Summary */}
       <div className="bg-matcha-med rounded-xl p-6 space-y-3 text-white text-center">
         <h3 className="text-xl font-semibold mb-2">Your Taste Inputs</h3>
-        <p><strong>🌱 Experience:</strong> {parsed.experience}</p>
         <p><strong>🍶 Usage:</strong> {parsed.usage.join(", ")}</p>
         <p><strong>💰 Target Price:</strong> ${Math.round(parsed.price * 30)} for a 30g tin</p>
         {parsed.cultivars?.length > 0 && (
