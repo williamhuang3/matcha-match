@@ -1,4 +1,5 @@
 "use client";
+
 import { useMemo, useEffect, useState } from "react";
 import type { Matcha } from "@/types/Matcha";
 import Image from "next/image";
@@ -20,9 +21,9 @@ export default function ResultsClient() {
   const archetype = getMatchaArchetype(parsed);
   const regionInfo = getFavoriteRegion(parsed);
   const [recommended, setRecommended] = useState<Matcha[] | null>(null);
-  const [showConfetti, setShowConfetti] = useState(false);
+  const [revealed, setRevealed] = useState<string[]>([]);
+  const [confettiId, setConfettiId] = useState<string | null>(null);
   const [width, height] = useWindowSize();
-
 
   const brandLogos: Record<string, string> = {
     "Ippodo": "/logos/ippodo.png",
@@ -38,13 +39,6 @@ export default function ResultsClient() {
     "Kanbayashi Shunsho": "/logos/kanbayashi.png",
     "Yamamasa Koyamaen": "/logos/yamamasa.jpg",
   };
-  useEffect(() => {
-    if (recommended && recommended.length > 0) {
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 5000); // stop after 5 sec
-    }
-  }, [recommended]);
-  
 
   useEffect(() => {
     const fetchRecommendations = async () => {
@@ -63,6 +57,12 @@ export default function ResultsClient() {
     }
   }, [parsed]);
 
+  const handleReveal = (id: string) => {
+    if (!revealed.includes(id)) {
+      setRevealed((prev) => [...prev, id]);
+    }
+  };
+
   const flavorData = [
     { flavor: "Umami", value: parsed?.umami },
     { flavor: "Grassy", value: parsed?.grassy },
@@ -76,17 +76,8 @@ export default function ResultsClient() {
 
   return (
     <main className="max-w-3xl mx-auto p-6 space-y-10">
-      {showConfetti && (
-        <Confetti
-          width={width}
-          height={height}
-          numberOfPieces={250}
-          recycle={false}
-          colors={["#A7C4A0", "#E6F0E0", "#617E60", "#C4D7B2", "#ffffff"]}
-        />
-      )}
 
-      {/* Taste Profile */}
+      {/* Radar Chart */}
       <h1 className="text-3xl font-bold text-matcha-taupe text-center">Your Matcha Taste Profile</h1>
 
       <div className="w-full h-72 bg-white rounded-xl shadow">
@@ -128,7 +119,7 @@ export default function ResultsClient() {
         )}
       </div>
 
-      {/* Top 3 Recommendations */}
+      {/* Matcha Recommendations */}
       <div className="mt-12 text-center space-y-6">
         <h2 className="text-3xl font-semibold text-matcha-taupe">
           Your Top 3 Matcha Picks 🍵
@@ -136,39 +127,105 @@ export default function ResultsClient() {
 
         {recommended ? (
           <div className="grid sm:grid-cols-3 gap-6 text-left">
-            {recommended.map((m) => (
-              <div
-                key={m._id}
-                className="bg-matcha-med text-white p-4 rounded-xl flex flex-col items-center shadow space-y-3"
-              >
-                {brandLogos[m.brand] && (
-                  <Image
-                    src={brandLogos[m.brand]}
-                    alt={m.brand}
-                    width={80}
-                    height={40}
-                    className="object-contain"
-                  />
-                )}
-                <p className="text-lg font-semibold text-center">
-                  {m.brand}: {m.name}
-                </p>
-                <p className="text-sm text-center opacity-90">{m.usage.join(", ")}</p>
-                <a
-                  href={`https://www.google.com/search?q=${encodeURIComponent(`${m.brand} ${m.name} matcha`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm underline"
+            {recommended.map((m) => {
+              const isRevealed = revealed.includes(m._id!);
+              return (
+                <div
+                  key={m._id}
+                  className="perspective"
+                  onClick={() => handleReveal(m._id!)}
                 >
-                  🛒 Find it online
-                </a>
-              </div>
-            ))}
+                  <div className={`flip-card dramatic ${isRevealed ? "flipped" : ""}`}>
+                    <div className="flip-card-inner">
+                      {/* Front: ? */}
+                      <div className="flip-card-front bg-matcha-taupe text-white p-8 rounded-xl shadow flex items-center justify-center text-5xl glow-on-hover">
+                        ???
+                      </div>
+
+                      {/* Back: Matcha */}
+                      <div className="flip-card-back bg-matcha-med text-white p-4 rounded-xl shadow flex flex-col items-center space-y-2">
+                        {brandLogos[m.brand] && (
+                          <Image
+                            src={brandLogos[m.brand]}
+                            alt={m.brand}
+                            width={80}
+                            height={40}
+                            className="object-contain"
+                          />
+                        )}
+                        <p className="text-lg font-semibold text-center">
+                          {m.brand}: {m.name}
+                        </p>
+                        <p className="text-sm text-center opacity-90">{m.usage.join(", ")}</p>
+                        <a
+                          href={`https://www.google.com/search?q=${encodeURIComponent(`${m.brand} ${m.name} matcha`)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm underline"
+                        >
+                          🛒 Find it online
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         ) : (
           <p className="text-matcha-taupe">Finding your perfect matchas...</p>
         )}
       </div>
+
+      <style jsx>{`
+        .perspective {
+          perspective: 1000px;
+        }
+        .flip-card {
+          width: 100%;
+          height: 240px;
+          position: relative;
+          transition: transform 0.6s ease-in-out;
+        }
+        .flip-card-inner {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          transform-style: preserve-3d;
+          transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .flipped .flip-card-inner {
+          transform: rotateY(180deg) scale(1.03);
+        }
+        .flip-card-front,
+        .flip-card-back {
+          backface-visibility: hidden;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 0.75rem;
+        }
+        .flip-card-back {
+          transform: rotateY(180deg);
+        }
+        .glow-on-hover {
+          box-shadow: 0 0 0 transparent;
+          transition: box-shadow 0.4s ease;
+        }
+        .flip-card:hover .glow-on-hover {
+          animation: hoverWiggle 0.3s ease-in-out infinite alternate;
+          box-shadow: 0 0 12px #a7c4a0;
+        }
+        @keyframes hoverWiggle {
+          from {
+            transform: translateX(-1px);
+          }
+          to {
+            transform: translateX(1px);
+          }
+        }
+      `}</style>
     </main>
   );
 }
+
