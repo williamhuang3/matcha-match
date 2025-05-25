@@ -8,8 +8,6 @@ import {
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer,
 } from "recharts";
 import { getMatchaArchetype, getFavoriteRegion } from "@/lib/analyzeTaste";
-import Confetti from "react-confetti";
-import { useWindowSize } from "@react-hook/window-size";
 
 export default function ResultsClient() {
   const params = useSearchParams();
@@ -22,8 +20,6 @@ export default function ResultsClient() {
   const regionInfo = getFavoriteRegion(parsed);
   const [recommended, setRecommended] = useState<Matcha[] | null>(null);
   const [revealed, setRevealed] = useState<string[]>([]);
-  const [confettiId, setConfettiId] = useState<string | null>(null);
-  const [width, height] = useWindowSize();
 
   const brandLogos: Record<string, string> = {
     "Ippodo": "/logos/ippodo.png",
