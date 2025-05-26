@@ -77,7 +77,7 @@ export default function Home() {
       />
 
       {/* 🧾 White Content Box */}
-      <div className="relative z-10 bg-white/90 backdrop-blur-md rounded-xl shadow-lg px-8 py-10 max-w-xl w-full">
+      <div className="relative z-10 bg-white/60 backdrop-blur-md rounded-xl shadow-lg px-8 py-10 max-w-xl w-full">
         <motion.h1
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}

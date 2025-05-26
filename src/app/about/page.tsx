@@ -1,64 +1,190 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+
+/* ---------- reusable fade-up variant ---------- */
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  show:  { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
+};
+
+/* ---------- shimmer divider ---------- */
+const Divider = () => (
+  <motion.div
+    variants={fadeUp}
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: true }}
+    className="h-1 w-40 mx-auto bg-gradient-to-r from-matcha-med via-matcha-light to-matcha-med animate-pulse rounded-full my-8"
+  />
+);
 
 export default function AboutPage() {
   return (
-    <main className="max-w-2xl mx-auto p-6 sm:p-8 text-center text-matcha-taupe flex flex-col items-center space-y-6">
+    <main className="max-w-2xl mx-auto p-6 sm:p-8 text-matcha-taupe space-y-24">
 
-      {/* Profile Picture */}
-      <div className="w-full max-w-md rounded-xl overflow-hidden shadow-lg border-4 border-matcha-med">
+      {/* ---------- hero image ---------- */}
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="w-full max-w-md mx-auto rounded-xl overflow-hidden shadow-lg border-4 border-matcha-med"
+      >
         <Image
-          src="/me.jpeg" // place the new file in /public folder
+          src="/me.jpeg"
           alt="William making matcha"
           width={800}
           height={600}
           className="w-full h-auto object-cover"
         />
-      </div>
+      </motion.div>
 
+      {/* ---------- emphasis headline ---------- */}
+      
 
-      {/* Intro & Backstory */}
-      <div className="space-y-6">
-        <h1 className="text-3xl sm:text-4xl font-bold">About MatchaMatch</h1>
+      {/* ---------- section 1 ---------- */}
+      <motion.section
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.4 }}
+        className="space-y-6 text-center text-lg leading-relaxed"
+      >
+        <p>
+          Hi, I’m <strong>Will</strong> — UCLA grad going into software engineering, gym-goer, and (maybe one day) a matcha café owner!
+        </p>
+      </motion.section>
 
-        <p className="text-lg leading-relaxed">
-          Hey! I&rsquo;m Will — a matcha enthusiast, UCLA computational biology grad pivoting to SWE, and (hopefully) future café owner.
-        </p>
+      <motion.h2
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="text-3xl sm:text-4xl font-bold text-center"
+      >
+        How it all started...
+      </motion.h2>
 
-        {/* Spacer under first paragraph */}
-        <div className="h-2 sm:h-4" />
+      <Divider />
 
-        <p className="text-md leading-relaxed">
-          Since my middle school days of mixing Costco matcha powder into vanilla ice cream, I&rsquo;ve tried to perfect my craft and dive deeper into what matcha has to offer. 
-          Fast forward to college, and I now spend most of my free time hosting home cafés for friends, experimenting with new matcha drink recipes, and trying out different cultivars.
+      <motion.section
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.4 }}
+        className="space-y-6 text-center text-lg leading-relaxed"
+      >
+        <p>
+          So <strong>how did I get into this?</strong> To be honest, as the child of two Chinese parents, I&apos;ve always loved green tea. Naturally curious after sneaking a few sips from
+          my mom&apos;s leftover jasmine pot, I asked her, &rdquo;What other green teas are there?&rdquo; From that point on, I was dedicated to learning about
+          every type of green tea I could find. Longjing for its nuttiness. Sencha for its grassiness. But matcha, with its different terroirs, cultivars, and preparation methods, was a whole different animal.
         </p>
-        <p className="text-md leading-relaxed">  
-          Along the way, I realized most people who say they don&rsquo;t like matcha have only tried bulk culinary powder &mdash; and unfortunately walk away thinking it tastes like dirt or grass.
+        <p>
+          Of all the green teas I tried, matcha was the most complex tasting and fun to make! Perfecting recipes and researching brands like Ippodo,
+          by college, I found myself whisking up lattes pretty much every single time a friend was over. Eventually, 3 friends became 10. 10 became 30. Before I knew it, I had started what was
+          essentially a pop-up café in my apartment kitchen.
         </p>
-        <p className="text-md leading-relaxed">
-          But the truth is, matcha is a spectrum: umami-rich to nutty, bright to mellow, sweet to astringent, or culinary to first harvest (sometimes called ceremonial). With that in mind, I built MatchaMatch as a way to help people discover matchas from personalized taste profiles.
-        </p>
-        <p className="text-md leading-relaxed">
-          Whether you&rsquo;re just getting into it or chasing that perfect koicha, I hope this helps you find something you love!
-        </p>
-        <p className="text-md mt-2">
-          Want to help grow the database?{" "}
-          <a href="/submit" className="underline">Submit your favorite matcha here.</a>
-        </p>
-      </div>
+      </motion.section>
 
-      {/* Social Links */}
-      <div className="flex space-x-6 text-2xl mt-6">
-        <a href="https://github.com/williamhuang3" target="_blank" rel="noopener noreferrer" className="hover:text-black">
+      {/* ---------- section 2 ---------- */}
+      <motion.section
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.4 }}
+        className="space-y-6 text-center text-lg leading-relaxed"
+      >
+        <p>
+          All the while during this matcha craze, my friends kept asking the same thing:
+        </p>
+      </motion.section>
+
+      {/* ---------- Dramatic question ---------- */}
+      <motion.h2
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="text-3xl sm:text-4xl font-extrabold text-center"
+      >
+        What&nbsp;matcha&nbsp;should&nbsp;I&nbsp;get?
+      </motion.h2>
+
+      <Divider />
+
+      {/* ---------- section 3 ---------- */}
+      <motion.section
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.4 }}
+        className="space-y-6 text-center text-lg leading-relaxed"
+      >
+        <p>
+          Now I don&apos;t consider myself an actual expert, but the answer depends on <em>a lot</em>: are you sipping usucha, koicha,
+          making fruit lattes, or baking? Do you prefer umami or nutty first matchas? Sweet or grassy?
+        </p>
+        <p>
+          For a beginner it&apos;s overwhelming — dozens of cultivars, grades, and price points.
+        </p>
+      </motion.section>
+
+      {/* ---------- MatchaMatch headline ---------- */}
+      <motion.h2
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="text-3xl sm:text-4xl font-bold text-center"
+      >
+        That’s why I built MatchaMatch!
+      </motion.h2>
+
+      <Divider />
+
+      {/* ---------- section 4 ---------- */}
+      <motion.section
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.4 }}
+        className="space-y-6 text-center text-lg leading-relaxed"
+      >
+        <p>
+          Take a short taste quiz, and MatchaMatch maps your flavor profile to a curated
+          database so you can skip the trial-and-error. Whether you&apos;re a seasoned connoisseur or 
+          just getting into things, I hope MatchaMatch helps you find the perfect matcha for your needs!
+        </p>
+        <p className="text-base">
+          Want to help the project grow?&nbsp;
+          <Link href="/submit" className="underline">
+            Submit your favorite matcha →
+          </Link>
+        </p>
+      </motion.section>
+
+      {/* ---------- social links ---------- */}
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="flex justify-center space-x-8 text-3xl"
+      >
+        <Link href="https://github.com/williamhuang3" target="_blank" className="hover:text-black">
           <FaGithub />
-        </a>
-        <a href="https://linkedin.com/in/whuang03" target="_blank" rel="noopener noreferrer" className="hover:text-[#0077b5]">
+        </Link>
+        <Link href="https://linkedin.com/in/whuang03" target="_blank" className="hover:text-[#0077b5]">
           <FaLinkedin />
-        </a>
-        <a href="https://instagram.com/whu4ng" target="_blank" rel="noopener noreferrer" className="hover:text-[#E1306C]">
+        </Link>
+        <Link href="https://instagram.com/whu4ng" target="_blank" className="hover:text-[#E1306C]">
           <FaInstagram />
-        </a>
-      </div>
+        </Link>
+      </motion.div>
     </main>
   );
 }
