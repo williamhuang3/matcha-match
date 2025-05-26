@@ -52,7 +52,7 @@ function usageScore(user: string[], matcha: string[]): number {
 export function getTopMatchas(
   user: TasteProfile,
   matchas: Matcha[],
-  k = 3
+  k = 9
 ): Matcha[] {
   // Normalize on real taste + price fields
   const featureMatrix = matchas.map((m) => {
