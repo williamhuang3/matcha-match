@@ -77,17 +77,12 @@ export default function Home() {
       />
 
       {/* 🧾 White Content Box */}
-      + <div className="relative z-10 bg-white/90 backdrop-blur-md rounded-xl shadow-lg
-+                 px-6 py-8
-+                 w-11/12   /* 92 % width on very small screens           */
-+                 sm:w-4/5 /* 80 % once ≥ 640 px                           */
-+                 md:max-w-xl /* cap at 384 px (same as before)           */
-+">
+      <div className="relative z-10 bg-white/90 backdrop-blur-md rounded-xl shadow-lg px-8 py-10 max-w-xl w-full">
         <motion.h1
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-5xl sm:text-6xl font-extrabold text-matcha-taupe mb-4 drop-shadow-sm"
+          className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-matcha-taupe mb-4 drop-shadow-sm break-words"
         >
           🍵 MatchaMatch
         </motion.h1>
