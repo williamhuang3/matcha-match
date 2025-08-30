@@ -75,6 +75,10 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ regionName }) => {
       
       const returnDateStr = returnDate.toISOString().split('T')[0];
 
+      // Create AbortController for timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 25000); // 25 second timeout
+
       const response = await fetch('/api/flights', {
         method: 'POST',
         headers: {
@@ -88,10 +92,16 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ regionName }) => {
           currency: 'USD',
           adults: 1,
         }),
+        signal: controller.signal,
       });
 
+      clearTimeout(timeoutId);
+
       if (!response.ok) {
-        throw new Error('Failed to fetch flights');
+        if (response.status === 504) {
+          throw new Error('Flight search is taking too long. Please try again.');
+        }
+        throw new Error(`Failed to fetch flights (${response.status})`);
       }
 
       const data = await response.json();
@@ -100,7 +110,15 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ regionName }) => {
       const allFlights = [...(data.best_flights || []), ...(data.other_flights || [])];
       setFlights(allFlights.slice(0, 3));
     } catch (err) {
-      setError('Unable to fetch flights. Please try again later.');
+      if (err instanceof Error) {
+        if (err.name === 'AbortError') {
+          setError('Flight search timed out. Please try again with a different date.');
+        } else {
+          setError(err.message);
+        }
+      } else {
+        setError('Unable to fetch flights. Please try again later.');
+      }
       console.error('Flight search error:', err);
     } finally {
       setLoading(false);
@@ -126,8 +144,8 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ regionName }) => {
     <div className="space-y-4">
       {/* Search Input */}
       <div className="space-y-3">
-        <div>
-          <label className="block text-sm font-medium text-matcha-taupe mb-2">
+        <div className="flex flex-col items-center">
+          <label className="block text-sm font-medium text-matcha-taupe mb-2 text-center">
             Departure Date
           </label>
           <input
@@ -135,7 +153,7 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ regionName }) => {
             value={searchDate}
             onChange={(e) => setSearchDate(e.target.value)}
             min={new Date().toISOString().split('T')[0]}
-            className="w-full px-4 py-2 border border-matcha-med/30 rounded-lg focus:ring-2 focus:ring-matcha-med focus:border-transparent"
+            className="w-full max-w-xs px-4 py-2 border border-matcha-med/30 rounded-lg focus:ring-2 focus:ring-matcha-med focus:border-transparent text-center mx-auto"
           />
         </div>
         <button

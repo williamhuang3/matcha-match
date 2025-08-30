@@ -24,3 +24,31 @@
     -webkit-line-clamp: 3;
   }
 }
+
+@layer components {
+  /* Custom date picker styling */
+  input[type="date"] {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  /* Center the calendar popup */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+  
+  input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+  
+  /* Ensure calendar appears centered on mobile */
+  @media (max-width: 768px) {
+    input[type="date"] {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
