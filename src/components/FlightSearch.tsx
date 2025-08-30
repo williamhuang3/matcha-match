@@ -51,6 +51,26 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ regionName }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searchDate, setSearchDate] = useState('');
+  const [departureAirport, setDepartureAirport] = useState('JFK,LAX,ORD');
+
+  // Common US airport options
+  const airportOptions = [
+    { value: 'JFK,LAX,ORD', label: 'Major US Cities (NY, LA, Chicago)' },
+    { value: 'JFK,LGA,EWR', label: 'New York Area (JFK, LGA, EWR)' },
+    { value: 'LAX,BUR,LGB', label: 'Los Angeles Area (LAX, Burbank, Long Beach)' },
+    { value: 'ORD,MDW', label: 'Chicago Area (ORD, Midway)' },
+    { value: 'SFO,OAK,SJC', label: 'San Francisco Bay Area (SFO, Oakland, San Jose)' },
+    { value: 'SEA', label: 'Seattle (SEA)' },
+    { value: 'DEN', label: 'Denver (DEN)' },
+    { value: 'ATL', label: 'Atlanta (ATL)' },
+    { value: 'MIA,FLL', label: 'Miami Area (MIA, Fort Lauderdale)' },
+    { value: 'DFW,DAL', label: 'Dallas Area (DFW, Love Field)' },
+    { value: 'IAH,HOU', label: 'Houston Area (IAH, Hobby)' },
+    { value: 'BOS', label: 'Boston (BOS)' },
+    { value: 'DCA,IAD,BWI', label: 'Washington DC Area (DCA, IAD, BWI)' },
+    { value: 'PHX', label: 'Phoenix (PHX)' },
+    { value: 'LAS', label: 'Las Vegas (LAS)' },
+  ];
 
   // Set default search date to 30 days from now
 
@@ -62,7 +82,7 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ regionName }) => {
   }, []);
 
   const searchFlights = async () => {
-    if (!searchDate) return;
+    if (!searchDate || !departureAirport) return;
 
     setLoading(true);
     setError(null);
@@ -85,7 +105,7 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ regionName }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          departure_id: 'JFK,LAX,ORD', // Major US airports
+          departure_id: departureAirport, // Use selected departure airport
           arrival_id: 'NRT,HND', // Tokyo airports (Narita and Haneda)
           outbound_date: searchDate,
           return_date: returnDateStr,
@@ -146,6 +166,22 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ regionName }) => {
       <div className="space-y-3">
         <div className="flex flex-col items-center">
           <label className="block text-sm font-medium text-matcha-taupe mb-2 text-center">
+            Departure Airport(s)
+          </label>
+          <select
+            value={departureAirport}
+            onChange={(e) => setDepartureAirport(e.target.value)}
+            className="w-full max-w-md px-4 py-2 border border-matcha-med/30 rounded-lg focus:ring-2 focus:ring-matcha-med focus:border-transparent text-center mx-auto bg-white"
+          >
+            {airportOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex flex-col items-center">
+          <label className="block text-sm font-medium text-matcha-taupe mb-2 text-center">
             Departure Date
           </label>
           <input
@@ -158,7 +194,7 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ regionName }) => {
         </div>
         <button
           onClick={searchFlights}
-          disabled={loading || !searchDate}
+          disabled={loading || !searchDate || !departureAirport}
           className="w-full bg-matcha-med text-white py-2 px-4 rounded-lg hover:bg-matcha-taupe disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {loading ? 'Searching Flights...' : 'Search Flights to Tokyo'}
@@ -255,7 +291,7 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ regionName }) => {
       )}
 
       {/* No Results */}
-      {!loading && !error && flights.length === 0 && searchDate && (
+      {!loading && !error && flights.length === 0 && searchDate && departureAirport && (
         <div className="text-center py-6 text-matcha-taupe/70">
           <p>Click &ldquo;Search Flights&rdquo; to find flights to Tokyo</p>
         </div>
