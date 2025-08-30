@@ -5,7 +5,6 @@ const MONGODB_URI = process.env.MONGODB_URI!;
 
 declare global {
   // Avoid re-declaring in every file
-  // eslint-disable-next-line no-var
   var _mongoose: {
     conn: Mongoose | null;
     promise: Promise<Mongoose> | null;

@@ -12,12 +12,12 @@ type TasteData = {
   export function getMatchaArchetype(taste: TasteData): string {
     const maxFlavor = getTopFlavor(taste);
     const personas: Record<string, string> = {
-      umami: "The Umami Purist 🍶",
-      grassy: "The Green Dreamer 🌿",
-      nutty: "The Toasty Traditionalist 🍂",
-      sweetness: "The Smooth Sweetheart 🍬",
+      umami: "Umami",
+      grassy: "Grassy",
+      nutty: "Nutty",
+      sweetness: "Sweet",
     };
-    return personas[maxFlavor] ?? "The Balanced Brewer 🎛️";
+    return personas[maxFlavor] ?? "Balanced";
   }
   
   export function getFavoriteRegion(taste: TasteData): {

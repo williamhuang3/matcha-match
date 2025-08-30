@@ -31,26 +31,34 @@ const cultivarOptions = ["Samidori", "Asahi", "Uji Hikari", "Yabukita", "Okumido
 const usageOptions = [
   {
     key: "Koicha",
-    desc: "Thick paste-like matcha",
-    icons: "🍵🍵🍵🍵 + 💧",
+    desc: "Thick, paste-like matcha",
+    icon: "厚", // Japanese character for "thick"
+    color: "bg-matcha-taupe", // Darkest for most concentrated
+    visual: "Low astringency",
     conflictsWith: ["Latte", "Culinary"],
   },
   {
     key: "Usucha",
-    desc: "Traditional matcha",
-    icons: "🍵🍵 + 💧💧",
+    desc: "Traditional ceremony matcha",
+    icon: "茶", // Japanese character for "tea"
+    color: "bg-matcha-med", // Medium tone for traditional
+    visual: "Low to medium astringency",
     conflictsWith: ["Culinary"],
   },
   {
     key: "Latte",
     desc: "Matcha with milk",
-    icons: "🍵 + 💧 + 🥛",
+    icon: "☕", // Coffee cup emoji
+    color: "bg-matcha-light", // Light for creamy
+    visual: "Medium to high astringency",
     conflictsWith: ["Koicha"],
   },
   {
     key: "Culinary",
     desc: "For smoothies, desserts, or baking",
-    icons: "🍵 + 🍞",
+    icon: "🍰", // Cake emoji
+    color: "bg-gradient-to-br from-matcha-med to-matcha-light", // Gradient for versatility
+    visual: "Most astringent",
     conflictsWith: ["Koicha", "Usucha"],
   },
 ];
@@ -140,13 +148,13 @@ export default function TasteTestPage() {
           </div>
         ))}
 
-        {/* Usage Selection with Button Cards */}
+        {/* Usage Selection with Square Icon Cards */}
         <div>
           <label className="block mb-2 text-sm font-medium text-matcha-taupe">
             Preferred Usage
           </label>
-          <div className="space-y-4">
-            {usageOptions.map(({ key, desc, icons }) => {
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {usageOptions.map(({ key, desc, icon, color, visual }) => {
               const isSelected = usage.includes(key);
               const isDisabled = !isSelected && disabledUsages.includes(key);
               return (
@@ -154,15 +162,37 @@ export default function TasteTestPage() {
                   key={key}
                   type="button"
                   onClick={() => !isDisabled && toggleUsage(key)}
-                  className={`flex w-full items-start justify-between gap-4 p-3 border rounded-lg transition
-                    ${isSelected ? "bg-matcha-med text-white" : "border-matcha-med"}
-                    ${isDisabled ? "opacity-40 cursor-not-allowed" : ""}`}
+                  className={`flex items-center gap-3 p-4 border-2 rounded-xl transition-all duration-200 
+                    ${isSelected 
+                      ? "border-matcha-med bg-matcha-med/10 shadow-md" 
+                      : "border-gray-200 hover:border-matcha-light"
+                    }
+                    ${isDisabled ? "opacity-40 cursor-not-allowed" : "hover:shadow-lg transform hover:scale-[1.02]"}`}
                 >
-                  <div className="flex-1 text-left">
-                    <p className="font-semibold text-matcha-taupe">{key}</p>
-                    <p className="text-xs text-matcha-taupe">{desc}</p>
+                  {/* Square Icon */}
+                  <div className={`w-12 h-12 ${color} rounded-lg flex items-center justify-center text-white text-lg font-bold shadow-md`}>
+                    {icon}
                   </div>
-                  <div className="text-xl text-right whitespace-nowrap">{icons}</div>
+                  
+                  {/* Content */}
+                  <div className="flex-1 text-left">
+                    <h3 className="font-semibold text-matcha-taupe text-sm">{key}</h3>
+                    <p className="text-xs text-gray-600 mt-0.5">{desc}</p>
+                    <p className="text-xs text-matcha-taupe mt-1 font-medium">{visual}</p>
+                  </div>
+                  
+                  {/* Selection Indicator */}
+                  <div className={`w-5 h-5 rounded-full border-2 transition-all ${
+                    isSelected 
+                      ? "bg-matcha-med border-matcha-med" 
+                      : "border-gray-300"
+                  }`}>
+                    {isSelected && (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      </div>
+                    )}
+                  </div>
                 </button>
               );
             })}
